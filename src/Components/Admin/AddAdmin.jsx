@@ -9,6 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import axios from '../Axios';
 import { Toast } from "../Toast";
+import { Button } from "@mui/base";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {Container,GlobalStyle,Header,
@@ -46,6 +47,38 @@ export default function AddAdmin() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
+
+  const handleDelete = (categoryId) => {
+    axios.delete(`/product/${categoryId}`)
+      .then(function(response){
+        console.log("Deleted successfully:", response);
+        const newData = data.filter(item => item.id !== categoryId);
+        setData(newData);
+        if(response.status==200){
+          toast.success("محصول با موفقیت حذف شد", {
+            position: "bottom-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            rtl: true,
+          });
+        }
+  
+        
+      })
+      .catch(function(error){
+        console.error("Error:", error);
+        if (error.response) {
+          console.log("Response data:", error.response.data);
+          console.log("Response status:", error.response.status);
+        }
+      });
+  }
  
   const fetchData = () => {
     axios
@@ -156,9 +189,16 @@ export default function AddAdmin() {
         {columns.map((column) => {
           if (column.id === 'delete') {
             return (
-              <TableCell key={column.id} align={column.align}>
-               
-              </TableCell>
+              <TableCell key={column.id} align={column.align} style={{ color: '#B4B7BD', borderColor: '#161e31' }}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => handleDelete(row.id)}
+                style={{ backgroundColor: '#b31b1b', color: 'white',border:'none' }}
+              >
+                Delete
+              </Button>
+            </TableCell>
             );
            
           }

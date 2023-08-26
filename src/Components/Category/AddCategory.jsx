@@ -191,7 +191,7 @@ export default function AddCategory() {
         {columns.map((column) => {
           if (column.id === 'delete') {
             return (
-              <TableCell key={column.id} align={column.align}>
+              <TableCell key={column.id} align={column.align} style={{ color: '#B4B7BD', borderColor: '#161e31' }}>
                 <Button
                   variant="outlined"
                   color="secondary"
@@ -207,7 +207,7 @@ export default function AddCategory() {
           const value = row[column.id];
           return (
             <TableCell key={column.id} align={column.align} style={{ color: '#B4B7BD', borderColor: '#161e31' }}>
-              {column.format && typeof value === 'number' ? column.format(value) : value}
+              {column.format && typeof value === 'number' ? column.format(value) : value }
             </TableCell>
           );
         })}
