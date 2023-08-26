@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import '../App.css';
-
 import {RiAdminLine} from "react-icons/ri"
+
 export const GlobalStyle = createGlobalStyle`
   body {
  padding: 0;

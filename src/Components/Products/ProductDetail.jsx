@@ -139,15 +139,16 @@ export default function ProductDetail() {
         navigate(`/user/${row.id}`); 
       };
       return (
-        <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+        <TableRow hover role="checkbox" tabIndex={-1} key={index} >
         {columns.map((column) => {
           if (column.id === 'delete') {
             return (
-              <TableCell key={column.id} align={column.align}>
+              <TableCell key={column.id} align={column.align} style={{ color: '#B4B7BD', borderColor: '#161e31' }}>
                 <Button
                   variant="outlined"
                   color="secondary"
                   onClick={() => handleDelete(row.id)}
+                  style={{ backgroundColor: '#b31b1b', color: 'white',border:'none' }}
                 >
                   Delete
                 </Button>

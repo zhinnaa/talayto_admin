@@ -33,9 +33,9 @@ import {
 
 import NavBar from "../NavBar";
 const columns = [
+  { id: 'category', label: 'کتگوری', minWidth: 50,align:'center' },
   { id: 'slug', label: 'اسلاگ', minWidth: 50,align:'center' },
   { id: 'parent', label: 'دسته', minWidth: 50,align:'center' },
-  { id: 'category', label: 'کتگوری', minWidth: 50,align:'center' },
   { id: 'delete', label: 'delete', minWidth:50, align:"center"}
 
 ];
@@ -122,7 +122,6 @@ export default function AddCategory() {
     axios.delete(`/category/${categoryId}`)
       .then(function(response){
         console.log("Deleted successfully:", response);
-        // Update the data state to reflect the changes
         const newData = data.filter(item => item.id !== categoryId);
         setData(newData);
   
@@ -196,7 +195,8 @@ export default function AddCategory() {
                 <Button
                   variant="outlined"
                   color="secondary"
-                  onClick={() => handleDelete(row.id)} // Add this line
+                  onClick={() => handleDelete(row.id)} 
+                  style={{ backgroundColor: '#b31b1b', color: 'white',border:'none' }}
                 >
                   Delete
                 </Button>
