@@ -1,0 +1,20 @@
+{
+    "users": [
+      {
+      
+        "email": "zhina",
+        "password": "password123"
+      },
+      {
+       
+        "email": "zii",
+        "password": "letmein"
+      },
+      {
+     
+        "email": "bob",
+        "password": "secret123"
+      }
+    ]
+  }
+  

@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'samim';
+  src: url(./fonts/B-NAZANIN.TTF);
+  font-size: 1.1rem;
+}
+:root {
+  /* Colors */
+  --black: #283046;
+  --grey: #a4b2bc;
+  --white: #fff;
+  --background:#161e31;
+  --yellow:#a79eff;
+  --text:#8d83f5
+}
+#filled-basic{
+  background-color: #121517;
+  color: white !important;
+ outline: 1px solid #454292; 
+ border-radius: 5px;
+width: 120px;
+ margin-top: 2em;
+ margin-right: 1em;
+ border-bottom: none;
+ border-width: 0;
+}
+
+#filled-basic::after{
+  border-bottom: none !important;
+}
+.react-toastify__toast--success {
+  background-color: green;
+}
