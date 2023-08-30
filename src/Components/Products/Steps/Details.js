@@ -43,8 +43,8 @@ export default function Details() {
 
 
   const dropdownOptionsWeightUnit = [
-    { label: "۱۸ گرم", value: "option 1" },
-    { label: "۲۴ گرم", value: "option 2" },
+    { label: "۱۸ گرم", value: "" },
+    { label: "۲۴ گرم", value: "" },
  
 
   ];

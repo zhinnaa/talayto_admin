@@ -30,7 +30,7 @@ export const Container = styled.div`
 `;
 
 export const Navbars = styled.nav`
-  width: ${(props) => (props.showmenu ? "18%" : "50px")};
+  width: ${(props) => (props.showmenu ? "16%" : "7%")};
   background-color: var(--black);
   position: absolute;
   right: 0;
@@ -38,20 +38,23 @@ export const Navbars = styled.nav`
   overflow: hidden;
   transition: 0.5s ease-in-out;
   height: 54em;
- @media (max-width:1050px){
-  width: 12%;
- }
+
 `;
 export const AdminHeader = styled.div`
   display: flex;
   justify-content: right;
   margin-top: 3em;
+
 `;
 export const AdminText = styled.span`
   color: var(--text);
   font-weight: 600;
   font-size: 1.6rem;
   display: ${(props) => (props.showmenu ? "block" : "none")};
+  @media (max-width:1050px){
+display:"none";
+ }
+
 
 `;
 export const Logoarm = styled(AiOutlineMenu)`
@@ -64,12 +67,16 @@ export const NavLinks = styled.ul`
   list-style: none;
   position: relative;
   direction: rtl;
-  width: 15rem;
+  width: 94%;
   transition: width 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-top: 1.5em;
+
+@media (max-width:1050px ){
+width:100%;
+
+}
 `;
 
 export const NavItems = styled.li`
@@ -77,15 +84,21 @@ export const NavItems = styled.li`
 `;
 export const StyledNavLink = styled(NavLink)`
   display: block;
-  width: ${(props) => (props.showmenu ? "12.8rem" : "3.125")};
-  margin-left: ${(props) => (props.showmenu ? "0" : "2.5em")};
+  width: ${(props) => (props.showmenu ? "100%" : "3.125")};
   text-decoration: none;
-  padding: 10px 10px;
+  padding: 10px 12px;
   color: #dcdcdc;
   font-size: 1.3rem;
   margin-top: 1.3em;
   cursor: pointer;
   transition: 0.4s ease-in-out;
+
+
+  @media (max-width:1050px ){
+margin-left: .5rem;
+
+}
+
 
   &.active {
     background: linear-gradient(to left, #8478ff, #8478ff, #877edb, #958fd2);
@@ -101,6 +114,8 @@ export const StyledNavLink = styled(NavLink)`
 `;
 export const NavLinkText = styled.span`
   padding-right: 1em;
+
+
 `;
 export const NavLinkAddIcon = styled(AiOutlineAppstoreAdd)`
   font-size: 20px;

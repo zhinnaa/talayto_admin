@@ -4,7 +4,7 @@ import {
   RowForm,
   FormGroup,
   FormLabel,
-  FormInput,
+  FormInput,wrapper
 } from "../../../StyleComponent/AddProducts";
 import { StepperContext} from "../../../Contexts/StepperContext";
 import FormSelect from "../FormSelect";
@@ -17,13 +17,18 @@ const FileInput = styled.input`
 `;
 
 const ImagePreview = styled.img`
-  width: 120px;
+  width: 80px;
   height: 120px;
+  display: flex;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 3.2em;
   border: 2px solid #ccc;
   margin-bottom: 2em;
+`;
+const FlexContainer = styled.div`
+  display: flex;
+  gap: 1rem;
 `;
 
 const UploadButton = styled.label`
@@ -38,13 +43,16 @@ const UploadButton = styled.label`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease-in-out;
   text-align: center;
+  margin-top: 8em;
+  margin-right: 2em;
   &:hover {
     background-color: #50479f;
   }
 `;
-export default function Acount() {
+export default function Acount({ setHasImages }) {
   const { userData, setUserData } = useContext(StepperContext)
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImages, setSelectedImages] = useState([]);
+
 
   useEffect(() => {
     console.log(userData)
@@ -62,52 +70,52 @@ export default function Acount() {
     }));
   };
 
-  // Define your dropdown options
+
   const dropdownOptions = [
-    { label: "انگشتر", value: "option1" },
-    { label: "گردنبند", value: "option2" },
-    { label: "دستبتد", value: "option3" },
+    { label: "انگشتر", value: "انگشتر" },
+    { label: "گردنبند", value: "گردنبند" },
+    { label: "دستبتد", value: "دستبند" },
   ];
 
   const handleImageChange =async (e) => {
-    console.log(e)
-    const file = e.target.files[0];
-    setSelectedImage(file);
-    console.log(file)
+   
+    const files = e.target.files;
+    const newSelectedImages = [...selectedImages];
 
+    for (const file of files) {
+      newSelectedImages.push(file);
+    }
+    
+    setSelectedImages(newSelectedImages);
+    setHasImages(true);
     const formData = new FormData();
-  
-    formData.append("image", file);
+    for (const image of newSelectedImages) {
+      formData.append("image", image, image.name);
+    }
 
-    for (var key of formData.entries()) {
-      console.log(key[0] + ', ' + key[1]);
-  }
-
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      image: file,
-    }));
+ 
 
     try {
-      const response = await fetch("http://91.107.160.88:3001/v1/upload", {
+      const requestOptions = {
         method: "POST",
-
-        body: (formData)
-      });
+        body: formData,
+        redirect: "follow",
+      };
   
-      if (response.status==200) {
-        console.log("Product added successfully!");
-       
+      const response = await fetch("http://91.107.160.88:3001/v1/upload", requestOptions);
+  
+      if (response.ok) {
+        console.log("Images uploaded successfully!");
+        const result = await response.text();
+        console.log(result);
       } else {
         console.error("Error:", response.status);
-
       }
     } catch (error) {
       console.error("Error:", error);
-    
     }
   
-  
+   
     
   };
 
@@ -115,68 +123,33 @@ export default function Acount() {
   return (
     <Novalidate $isFirst>
       <RowForm>
-        <FormGroup $isPic>
+        <FormGroup>
           <FormLabel></FormLabel>
-          {selectedImage ? (
-            <ImagePreview src={URL.createObjectURL(selectedImage)} alt="" />
-          ) : (
-            <ImagePreview src="" alt="" />
-          )}
-          <UploadButton htmlFor="imageUpload">اپلود عکس</UploadButton>
-          <FileInput
-            type="file"
-            id="imageUpload"
-            name="image"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
         </FormGroup>
       </RowForm>
-      <RowForm $isA>
-        <FormGroup>
-          <FormLabel>عنوان</FormLabel>
-          <FormInput
-            type="text"
-            onChange={handleChange}
-            value={userData.title}
-            name="title"
-            placeholder="عنوان"
-          ></FormInput>
-        </FormGroup>
-        <FormGroup $isDiv>
-          <FormLabel>توضیحات</FormLabel>
-          <FormInput
-            type="text"
-            onChange={handleChange}
-            value={userData.description}
-            name="description"
-            placeholder=""
-          ></FormInput>
-        </FormGroup>
-      </RowForm>
+      <RowForm>
+      <FormGroup $isPic>
+  <FormLabel></FormLabel>
+  <FlexContainer>
+    {selectedImages.map((image, index) => (
+      <ImagePreview key={index} src={URL.createObjectURL(image)} alt="" />
+    ))}
+  </FlexContainer>
+  <UploadButton htmlFor="imageUpload">اپلود عکس</UploadButton>
+  <FileInput
+    type="file"
+    id="imageUpload"
+    name="image"
+    accept="image/*"
+    multiple
+    onChange={handleImageChange}
+  />
+</FormGroup>
 
-      <RowForm $isA>
-        <FormGroup>
-          <FormLabel>تگ</FormLabel>
-          <FormInput
-            onChange={handleChange}
-            value={userData.tags}
-            name="tags"
-            type="text"
-          ></FormInput>
-        </FormGroup>
-        <FormGroup $isDiv>
-          <FormLabel>کتگوری</FormLabel>
-          <FormSelect
-            options={dropdownOptions}
-            onChange={(selectedOption) =>
-              handleCategoryChange(selectedOption.value)
-            }
-            value={userData.category }
-            name="category"
-          />
-        </FormGroup>
+
       </RowForm>
+     
+       
     </Novalidate>
   );
 }

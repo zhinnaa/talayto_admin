@@ -1,6 +1,6 @@
 
-import {  Container,GlobalStyle,HeaderConst,HeaderConstIcons,HeaderConstRight,HeaderConstText,AddUserText } from '../../StyleComponent/UserInfo'
-import { useEffect } from "react";
+import {  Container,GlobalStyle,HeaderConst,HeaderConstIcons,HeaderConstRight,HeaderConstText,AddUserText } from '../../../StyleComponent/UserInfo'
+import { useEffect,useState } from "react";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import * as React from "react";
@@ -10,14 +10,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import NavBar from '../NavBar';
-import axios from '../Axios';
-import { Toast } from "../Toast";
+import NavBar from '../../NavBar';
+import axios from '../../Axios';
+import { Toast } from "../../Toast";
 import { Button } from "@mui/base";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router-dom';
-
 
 const columns = [
   { id: 'title', label: 'عنوان', minWidth: 50,align:'center' },
@@ -26,40 +25,37 @@ const columns = [
   { id: 'discount', label: 'تخفیف', minWidth: 50,align:'center' },
   { id: 'weightUnit', label: 'وزن واحد', minWidth: 50,align:'center'  },
   { id: 'wage', label: 'اجرت', minWidth: 50,align:'right'  },
-  { id: 'addresses', label: 'ادرس', minWidth: 50, align: 'center' },
-  { id: 'delete', label: 'delete', minWidth:50, align:"center"}
+  { id: 'category', label: 'کتگوری', minWidth: 50, align: 'center' },
+  { id: 'thumbnailImage', label: 'تصویر', minWidth: 50, align: 'center',  format: (imageUrl) => <img src={imageUrl} alt="Product" style={{ maxWidth: '100px', maxHeight: '100px' }} /> },
+  { id: 'delete', label: 'حذف کالا', minWidth:50, align:"center"}
 ];
 
 
-
-
-
-
-export default function ProductDetail() {
+export default function ProductLists() {
   const [data, setData] = React.useState([]);
   const [page, setPage] = React.useState(0);
+ 
+  const [size, setSize] = useState("10000");
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const navigate = useNavigate();
   const [selectedUserId, setSelectedUserId] = React.useState(null);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  const fetchData = () => {
+  useEffect(() => {
     axios
-      .get("/product?size=20&page=1")
+      .get(`/product?size=${size}&page=1`)
       .then(function (response) {
         console.log("Fetched data:", response.data);
+        
         setData(response.data);
       })
       .catch(function (error) {
         console.error("Error:", error);
         Toast(error.response.data.errorMessage, false);
       });
-  };
-  
-  useEffect(() => {
-    fetchData();
-  }, []);
+  }, [size]);
+
 
 
   const handleDelete = (categoryId) => {
@@ -128,45 +124,50 @@ export default function ProductDetail() {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody  style={{ color:'white' }} >
+          <TableBody style={{ color: 'white' }}>
   {data
     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     .map((row, index) => {
-      
-
       const handleRowClick = () => {
-        setSelectedUserId(row.id); 
-        navigate(`/user/${row.id}`); 
+        setSelectedUserId(row.id);
+        navigate(`/product/${row.id}`);
       };
       return (
-        <TableRow hover role="checkbox" tabIndex={-1} key={index} >
-        {columns.map((column) => {
-          if (column.id === 'delete') {
-            return (
-              <TableCell key={column.id} align={column.align} style={{ color: '#B4B7BD', borderColor: '#161e31' }}>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={() => handleDelete(row.id)}
-                  style={{ backgroundColor: '#b31b1b', color: 'white',border:'none' }}
-                >
-                  Delete
-                </Button>
+        <TableRow hover role="checkbox" tabIndex={-1} key={index} onClick={handleRowClick}>
+          {columns.map((column) => {
+            if (column.id === 'delete') {
+              return (
+                <TableCell key={column.id} align={column.align} style={{ color: '#B4B7BD', borderColor: '#161e31' }}>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() => handleDelete(row.id)}
+                    style={{ backgroundColor: '#b31b1b', color: 'white', border: 'none' }}
+                  >
+                    حذف
+                  </Button>
+                </TableCell>
+              );
+            } else if (column.id === 'thumbnailImage') {
+              return (
+                <TableCell key={column.id} align={column.align}>
+                {column.format(row.thumbnailImage)}
               </TableCell>
-            );
-           
-          }
-          const value = row[column.id];
-          return (
-            <TableCell key={column.id} align={column.align} style={{ color: '#B4B7BD', borderColor: '#161e31' }}>
-              {column.format && typeof value === 'number' ? column.format(value) : value}
-            </TableCell>
-          );
-        })}
-      </TableRow>
+              );
+            } else {
+              const value = row[column.id];
+              return (
+                <TableCell key={column.id} align={column.align} style={{ color: '#B4B7BD', borderColor: '#161e31' }}>
+                  {column.format && typeof value === 'number' ? column.format(value) : value}
+                </TableCell>
+              );
+            }
+          })}
+        </TableRow>
       );
     })}
 </TableBody>
+
 
         </Table>
       </TableContainer>

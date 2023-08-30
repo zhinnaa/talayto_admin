@@ -12,8 +12,6 @@ export const GlobalStyle = createGlobalStyle`
  box-sizing: border-box;
  font-family: 'samim';
  background-color: #161d31;
-   /* --black: #283046; */
-  /* --background:#161d31; */
 }
 `;
 export const Headers = styled.div`
@@ -41,9 +39,10 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   width: 70%;
   background-color: #283046;
-  height: 600px;
-  margin-left: 6em;
+  height: ${props => (props.hasImages ? "1000px" : "600px")};
+  margin-left: 4em;
   border-radius: 1em;
+
 `;
 export const StepperHeader = styled.div`
   display: flex;
@@ -255,7 +254,7 @@ width:80%;
 export const Footer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 2em;
+
 `;
 
 export const PreButton = styled.button`

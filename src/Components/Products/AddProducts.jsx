@@ -26,7 +26,6 @@ import steps from "./steps";
 import Acount from "./Steps/Acount";
 import Details from "./Steps/Details";
 import NavBars from "../NavBar";
-// import { useStepperContext } from "../../Contexts/StepperContext";
 import axios from "../Axios";
 import { Toast } from "../Toast";
 import { ToastContainer, toast } from "react-toastify";
@@ -34,6 +33,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { StepperContext} from "../../Contexts/StepperContext";
+import Final from "./Steps/Final";
 
 export default function StepWizard() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -43,6 +43,7 @@ export default function StepWizard() {
   const [clickedBack, setClickedBack] = useState(false);
   const [isFinalStep, setIsFinalStep] = useState(false);
   const { userData } = useContext(StepperContext)
+  const [hasImages, setHasImages] = useState(false);
 
   useEffect(() => {
     console.log(userData)
@@ -65,9 +66,11 @@ export default function StepWizard() {
   const displayStep = (step) => {
     switch (step) {
       case 0:
-        return <Acount />;
+        return <Acount setHasImages={setHasImages} />;
       case 1:
         return <Details />;
+        case 2:
+        return <Final />;
 
       default:
     }
@@ -84,6 +87,7 @@ export default function StepWizard() {
       wage: parseFloat(userData.wage),
       quantity: parseInt(userData.quantity),
       discount: parseFloat(userData.discount),
+      category:userData.category,
      installment:{
       available:userData.installment.available === "yes",
       minWeight: parseFloat(userData.installment.minWeight),

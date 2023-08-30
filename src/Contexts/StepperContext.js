@@ -6,7 +6,7 @@ export function UseContextProvider({ children }) {
   const [userData, setUserData] = useState({
     quantity:0,
     title:"",
-    description:"huj",
+    description:"",
     tags:"",
     weightUnit:"",
     weight:"",
@@ -14,8 +14,8 @@ export function UseContextProvider({ children }) {
     category:"",
     discount:0.0,
     installment:{
-      available:"yes",
-      minWeight:0,
+      available:"no",
+      minWeight:0.0,
       deadline:0
     }
   });

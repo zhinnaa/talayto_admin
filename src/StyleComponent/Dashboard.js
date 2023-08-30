@@ -31,7 +31,7 @@ display: flex;
 direction: rtl;
 
 @media (max-width:1050px ){
-  width: 92%;
+  width: 82%;
 }
 `
 export const DashboardHeaderTitle=styled.div`
@@ -57,9 +57,13 @@ height: 395px;
 display: flex;
 margin-top: 3em;
 @media (max-width:1050px){
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: column;
+}
+@media (max-width:400px){
+  width: 75%;
+
 }
 
 
@@ -72,7 +76,7 @@ border-radius: 10px;
 
 @media (max-width:1050px){
  
- width: 97%;
+ width: 94%;
  margin-left: 1em;
 }
 `
@@ -104,19 +108,34 @@ border-radius: 4px;
   width: 95%;
   margin-top: 2em;
  }
+ @media (max-width:400px){
+  width: 75%;
+
+}
 `
 export const TopSalesUp=styled.div`
 width: 100%;
 height: 90px;
 display: flex;
 padding-left: 1em;
+@media (max-width:500px){
+  width: 100%;
+  display: flex;
+  flex-direction:column;
 
+}
 `
 export const TotalSalesUp=styled.div`
 width: 50%;
 background-color: var(--black);
 display: flex;
 border-radius: .2em;
+@media (max-width:500px){
+  width: 80%;
+  display: flex;
+  flex-direction:column;
+
+}
 `
 export const SalesIcon1=styled.div`
 width: 45%;
@@ -179,7 +198,13 @@ height: 100px;
 display: flex;
 padding-left: 1em;
 margin-top: 1em;
+@media (max-width:500px){
+  width: 100%;
+  display: flex;
+  flex-direction:column;
+  margin-top: 20em;
 
+}
 `
 
 export const TotalSalesVisitor=styled.div`
@@ -311,9 +336,14 @@ height: 300px;
 display: flex;
 margin-top: 2%;
 @media (max-width:1050px){
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: column;
+  margin-top:25%;
+}
+@media (max-width:500px){
+
+  margin-top:65%;
 }
 `
 
@@ -340,7 +370,7 @@ width:200px;
 
 export const CCharts=styled(CChart)`
 margin-left: 1em;
-width: 520px;
+width: 84%;
 
 `
 export const UlList=styled.ul`
