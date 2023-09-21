@@ -28,7 +28,7 @@ import {
   ,MenuItemsText,
   MenuItemsInput,
   Buttons,
-  SubmitButton,CancleButton
+  SubmitButton,CancleButton, HeaderThing
 } from "../../StyleComponent/AddCategory";
 
 import NavBar from "../NavBar";
@@ -36,7 +36,7 @@ const columns = [
   { id: 'category', label: 'کتگوری', minWidth: 50,align:'center' },
   { id: 'slug', label: 'اسلاگ', minWidth: 50,align:'center' },
   { id: 'parent', label: 'دسته', minWidth: 50,align:'center' },
-  { id: 'delete', label: 'delete', minWidth:50, align:"center"}
+  { id: 'delete', label: 'حذف', minWidth:50, align:"center"}
 
 ];
 
@@ -162,7 +162,7 @@ export default function AddCategory() {
           <HeaderIcon></HeaderIcon>
           <HeaderText>کتگوری ها </HeaderText>
         </HeaderField>
-        <HeaderButton onClick={handleButtonClick}>اضافه کردن کتگوری</HeaderButton>
+        <HeaderButton onClick={handleButtonClick}><HeaderThing>اضافه کردن کتگوری</HeaderThing></HeaderButton>
       </Header>
 
 
@@ -198,7 +198,7 @@ export default function AddCategory() {
                   onClick={() => handleDelete(row.id)} 
                   style={{ backgroundColor: '#b31b1b', color: 'white',border:'none' }}
                 >
-                  Delete
+                  حذف
                 </Button>
               </TableCell>
             );
@@ -263,8 +263,8 @@ export default function AddCategory() {
         ></MenuItemsInput>
         </MenuItems>
       <Buttons>
-        <SubmitButton  onClick={handleApiCategory}>Submit</SubmitButton>
-        <CancleButton onClick={handleButtonClick}>Cancle</CancleButton>
+        <SubmitButton  onClick={handleApiCategory}>ذخیره</SubmitButton>
+        <CancleButton onClick={handleButtonClick}>انصراف</CancleButton>
       </Buttons>
       </Menu>
     </Container>

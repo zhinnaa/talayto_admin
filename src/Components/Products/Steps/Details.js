@@ -126,8 +126,8 @@ export default function Details() {
             placeholder="" />
         </FormGroup>
         <FormGroup  $isDivs>
-          <FormLabel>تخفیف</FormLabel>
-          <FormInput $isDivs  type="text"
+          <FormLabel $isDivsLeft>تخفیف</FormLabel>
+          <FormInput $isDivsLeft  type="text"
             onChange={handleChange}
             value={userData.discount }
             name="discount"
@@ -163,8 +163,8 @@ export default function Details() {
         
         <FormGroup $isSecond>
           <FormLabel $isSecond> حداقل وزن قسط اول 
-            <FormInput
-              type="number"
+            <FormInput $isSecond
+              type="text"
               name="installment.minWeight"
               value={userData.installment.minWeight}
               onChange={handleInstallmentChange}
@@ -172,12 +172,12 @@ export default function Details() {
          </FormLabel>
           
         
-          <FormLabel $isSeconds>Deadline:
-            <FormInput
-              type="number"
+          <FormLabel $isSeconds>Deadline
+            <FormInput $isSeconds
+              type="text"
               name="installment.deadLine"
               value={userData.installment.deadLine}
-              onChange={handleInstallmentChange}
+              onChange={handleChange}
             />
           </FormLabel>
         </FormGroup>

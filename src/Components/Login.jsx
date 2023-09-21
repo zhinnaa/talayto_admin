@@ -23,6 +23,7 @@ import {
   LeftForm,
   SigninButton,
  User,
+ Textt,
 
 } from "../StyleComponent/LoginUi";
 
@@ -63,7 +64,7 @@ if(localStorage.getItem('access-token')){
       <LeftContainer>
         <LeftForm>
           <HeaderText>
-            <h2>خوش آمدید</h2>
+            <h1 style={{fontSize:"1.4rem"}}>خوش آمدید</h1>
           </HeaderText>
           <HeaderIndex>به اکانت خود وارد شوید</HeaderIndex>
           <Form onSubmit={handleSubmit}>
@@ -83,19 +84,15 @@ if(localStorage.getItem('access-token')){
             </FormHeader>
             <Input
               type="password"
-              placeholder="***"
+              placeholder="****"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
            
             ></Input>
            
           
-            <CheckboxContainer>
-              <InputRemember type="checkbox" />
-              <Label htmlFor="remember-me">مرا بخاطر بسپار</Label>
-            
-            </CheckboxContainer>
-            <SigninButton  onClick={handleSubmit} >ورود</SigninButton>
+
+            <SigninButton  onClick={handleSubmit} ><Textt>ورود</Textt></SigninButton>
     
           </Form>
         </LeftForm>

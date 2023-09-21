@@ -6,7 +6,9 @@ import AddUser from './Components/UserInfo/CreateUser'
 import Logins from './Components/Login';
 import AddCategory from './Components/Category/AddCategory';
 import UserDetails from './Components/UserInfo/UserDetails';
-import AddAdmin from './Components/Admin/AddAdmin'
+import AddAdmin from './Components/Admin/AddAdmin';
+import Logout from './Components/Logout'
+import GetOrders from './Components/GetOrders';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { UseContextProvider } from './Contexts/StepperContext';
 import ProductDetail from './Components/Products/ReadProducts/ProductLists';
@@ -22,6 +24,7 @@ export default function App() {
               {isLoggedIn ? (
                 <>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/GetOrders" element={<GetOrders />} />
               <Route path="/productDetail" element={<ProductDetail />} />
               <Route path="product/:userId" element={<ReadProduct />} />
               <Route path="/FormWizard" element={<DataTables />} />
@@ -32,7 +35,7 @@ export default function App() {
               <Route path="user/:userId" element={<UserDetails />} />
               <Route path="/datatable" />
               <Route path="/dashboard2" />
-              <Route path="/Logout" />
+              <Route path="/Logout" element={<Logout/>} />
                 </>
               ) : (
                 <>

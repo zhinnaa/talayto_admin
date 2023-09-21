@@ -18,8 +18,8 @@ import {
   UserInfoLabel,
   Wrapper,
   Wrapper1,
-} from "../../../StyleComponent/UserDetails";
-import photo from "../../../Image/Profile Interface-rafiki.png";
+} from "../../../StyleComponent/ProductDetail";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function UserDetails() {
@@ -50,6 +50,7 @@ function UserDetails() {
 
     const payload = {
         "title": userDetails.title,
+        thumbnailImage:"",
         "description": userDetails.description,
         "weight": userDetails.weight,
         "weightUnit": userDetails.weightUnit,
@@ -91,7 +92,7 @@ function UserDetails() {
     <Container>
       <GlobalStyle />
       <RightContainer>
-        <AdminImage src={photo}></AdminImage>
+        <AdminImage src={userDetails.thumbnailImage}></AdminImage>
       </RightContainer>
       <Wrapper>
         <Head>
@@ -102,73 +103,73 @@ function UserDetails() {
         </Head>
 
         <Wrapper1>
-          <UserInfo>
-            <UserInfoLabel>عنوان</UserInfoLabel>
+        <UserInfo $isSecond>
+            <UserInfoLabel $isCategory>کتگوری</UserInfoLabel>
             <UserInfoInput
+             edit={edit}
+              value={userDetails.category}
+              onChange={(event) =>
+                setUserDetails({
+                  ...userDetails,
+                  category: event.target.value,
+                })
+              }
+            ></UserInfoInput>
+          </UserInfo>
+          <UserInfo>
+            <UserInfoLabel $isTitle>نام محصول</UserInfoLabel>
+            <UserInfoInput $isTitle
+             edit={edit}
               value={userDetails.title}
               onChange={(event) =>
                 setUserDetails({ ...userDetails, title: event.target.value })
               }
             ></UserInfoInput>
           </UserInfo>
-          <UserInfo>
-            <UserInfoLabel>توضیحات</UserInfoLabel>
-            <UserInfoInput
-              value={userDetails.description}
-              onChange={(event) =>
-                setUserDetails({
-                  ...userDetails,
-                  description: event.target.value,
-                })
-              }
-            ></UserInfoInput>
-          </UserInfo>
+         
         </Wrapper1>
         <Wrapper1>
+         
           <UserInfo>
-            <UserInfoLabel>وزن</UserInfoLabel>
-            <UserInfoInput
-              value={userDetails.weight}
-              onChange={(event) =>
-                setUserDetails({ ...userDetails, weight: event.target.value })
-              }
-            ></UserInfoInput>
+            <UserInfoLabel>توضیحات</UserInfoLabel>
+            <UserInfoInput $isDescription 
+      as="textarea" // Render as a textarea element
+      rows={userDetails.description.split('\n').length + 1} // Adjust rows based on content
+      value={userDetails.description}
+      onChange={event =>
+        setUserDetails({ ...userDetails, description: event.target.value })
+      }
+      edit={edit}
+      // Apply larger height styling
+    />
           </UserInfo>
-          <UserInfo>
-            <UserInfoLabel>شماره تلفن</UserInfoLabel>
-            <UserInfoInput
-              value={userDetails.phoneNumber}
-              onChange={(event) =>
-                setUserDetails({
-                  ...userDetails,
-                  phoneNumber: event.target.value,
-                })
-              }
-            ></UserInfoInput>
-          </UserInfo>
+         
         </Wrapper1>
 
         <Wrapper1>
-          <UserInfo>
-            <UserInfoLabel>موجودی طلا</UserInfoLabel>
+        <UserInfo>
+            <UserInfoLabel>تعداد</UserInfoLabel>
             <UserInfoInput
-              value={userDetails.goldBalance}
+             edit={edit}
+              value={userDetails.quantity}
               onChange={(event) =>
                 setUserDetails({
                   ...userDetails,
-                  goldBalance: event.target.value,
+                  quantity: event.target.value,
                 })
               }
             ></UserInfoInput>
           </UserInfo>
+          
           <UserInfo>
-            <UserInfoLabel>موجودی حساب</UserInfoLabel>
+            <UserInfoLabel>وزن واحد</UserInfoLabel>
             <UserInfoInput
-              value={userDetails.walletBalance}
+             edit={edit}
+              value={userDetails.weightUnit}
               onChange={(event) =>
                 setUserDetails({
                   ...userDetails,
-                  walletBalance: event.target.value,
+                  weightUnit: event.target.value,
                 })
               }
             ></UserInfoInput>
@@ -176,27 +177,27 @@ function UserDetails() {
         </Wrapper1>
         <Wrapper1>
         <UserInfo>
-            <UserInfoLabel>تایید پسورد</UserInfoLabel>
+            <UserInfoLabel>اجرت</UserInfoLabel>
             <UserInfoInput
-            type="password"
-              value={userDetails.password}
+             edit={edit}
+              value={userDetails.wage}
               onChange={(event) =>
                 setUserDetails({
                   ...userDetails,
-                  password: event.target.value,
+                  wage: event.target.value,
                 })
               }
             ></UserInfoInput>
           </UserInfo>
         <UserInfo>
-            <UserInfoLabel>پسورد</UserInfoLabel>
+            <UserInfoLabel>تخفیف</UserInfoLabel>
             <UserInfoInput
-            type="password"
-              value={userDetails.password}
+            edit={edit}
+              value={userDetails.discount}
               onChange={(event) =>
                 setUserDetails({
                   ...userDetails,
-                  password: event.target.value,
+                  discount: event.target.value,
                 })
               }
             ></UserInfoInput>

@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
  padding: 0;
  margin: 0;
  box-sizing: border-box;
- font-family: 'samim';
+ font-family: 'estedad';
  background-color: var(--background)
  
   }
@@ -18,9 +18,6 @@ export const GlobalStyle = createGlobalStyle`
 export const Container=styled.div`
     width:80%;
     height:auto; 
-
-
-    
 `
 
 export const Headers=styled.div`

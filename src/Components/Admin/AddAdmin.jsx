@@ -26,13 +26,15 @@ import {Container,GlobalStyle,Header,
   MenuItemsInput,
   Buttons,
   SubmitButton,
-  CancleButton} from '../../StyleComponent/AddAdmin';
+  CancleButton,
+  Rightt,
+  HeaderThing} from '../../StyleComponent/AddAdmin';
   import NavBar from "../NavBar";
 
 const columns = [
   { id: 'username', label: 'یوزرنیم', minWidth: 50,align:'center' },
-  { id: 'permission', label: 'دسترسی ادمین', minWidth: 50,align:'center' },
-  { id: 'delete', label: 'delete', minWidth:50, align:"center"}
+  { id: 'permissions', label: 'دسترسی ادمین', minWidth: 50,align:'center' },
+  { id: 'delete', label: 'حذف', minWidth:50, align:"center"}
 
 ];
 
@@ -107,44 +109,74 @@ export default function AddAdmin() {
   const[permission,setPermission]=useState('');
   const[password,setPassword]=useState('');
 
-  const handleApiCategory=(e)=>{
+  const handleApiCategory = (e) => {
     e.preventDefault();
+  
+    const permissions = [];
+  
+    if (checkedProducts) {
+      permissions.push({
+        action: "create",
+        subject: "Product",
+      });
+    }
+  
+    if (checkedUser) {
+      permissions.push({
+        action: "read",
+        subject: "User",
+      });
+      permissions.push({
+        action: "update",
+        subject: "User",
+      });
+      permissions.push({
+        action: "delete",
+        subject: "User",
+      });
+    }
+  
+    if (checkedCategory) {
+      permissions.push({
+        action: "create",
+        subject: "Category",
+      });
+    }
+  
+    const actionPermissions = permissions.map(permission => permission.split(' ')[0]);
 
-    axios.post('http://api.talayto.com/v1/admin',{
-      username:username,
-      password:password,
-      permission:[
-        {action:'',
-      }
-      ]
-    })
-    .then(function(response){
-      console.log("response:",response);
-      if(response.status===200){
-        toast.success("ادمین با موفقیت اضافه شد", {
-          position: "bottom-right",
-          autoClose: 2500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          rtl: true,
-        });
-      }
-    })
-     .catch(function(error){
-      console.error("Error:", error);
-      if (error.response) {
-        console.log("Response data:", error.response.data);
-        console.log("Response status:", error.response.status);
-
-      }
-     })
-    
-
-  }
+    axios
+      .post("http://api.talayto.com/v1/admin", {
+        username: username,
+        password: password,
+        permissions: actionPermissions,
+      })
+      .then(function (response) {
+        console.log("response:", response);
+        if (response.status === 200) {
+          toast.success("ادمین با موفقیت اضافه شد", {
+            position: "bottom-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            rtl: true,
+          });
+        }
+      })
+      .catch(function (error) {
+        console.error("Error:", error);
+        if (error.response) {
+          console.log("Response data:", error.response.data);
+          console.log("Response status:", error.response.status);
+        }
+      });
+  };
+  
+  
   const handleButtonClick = () => {
     setMenuOpen(!menuOpen);
   };
@@ -160,10 +192,10 @@ export default function AddAdmin() {
           <HeaderIcon></HeaderIcon>
           <HeaderText>لیست ادمین ها</HeaderText>
         </HeaderField>
-        <HeaderButton onClick={handleButtonClick}>اضافه کردن ادمین</HeaderButton>
+        <HeaderButton onClick={handleButtonClick}><HeaderThing>اضافه کردن ادمین</HeaderThing></HeaderButton>
       </Header>
 
-
+<Rightt>
     <Paper sx={{ width: '60%', overflow: 'hidden',marginTop:'3.3em',marginLeft:'33%',backgroundColor:'#283046'}}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -196,7 +228,7 @@ export default function AddAdmin() {
                 onClick={() => handleDelete(row.id)}
                 style={{ backgroundColor: '#b31b1b', color: 'white',border:'none' }}
               >
-                Delete
+                حذف
               </Button>
             </TableCell>
             );
@@ -227,6 +259,7 @@ export default function AddAdmin() {
         style={{color:'white'}}
       />
     </Paper>
+    </Rightt>
       <Menu menuOpen={menuOpen}>
         <MenuHeader>
         <MenuHeaderText>اضافه کردن ادمین</MenuHeaderText>
@@ -250,33 +283,41 @@ export default function AddAdmin() {
         <MenuItemsText> دسترسی ادمین</MenuItemsText>
         
         </MenuItems>
-        <MenuItems>
+        <MenuItems $isPermission>
         <MenuItemsText>اضافه کردن محصول</MenuItemsText>
-        <MenuItemsInput
+        <MenuItemsInput $isCheckbox
         type="checkbox"
         checked={checkedProducts}
         onChange={(e)=>setCheckedProducts(e.target.value)}
         ></MenuItemsInput>
         </MenuItems>
-        <MenuItems >
+        <MenuItems  $isPermission >
         <MenuItemsText> دسترسی به یوزر</MenuItemsText>
-        <MenuItemsInput
+        <MenuItemsInput  $isCheckbox1
         type="checkbox"
         checked={checkedUser}
         onChange={(e)=>setCheckedUser(e.target.value)}
         ></MenuItemsInput>
         </MenuItems>
-        <MenuItems>
+        <MenuItems  $isPermission>
         <MenuItemsText $isCheckbox>دسترسی به کتگوری</MenuItemsText>
-        <MenuItemsInput 
+        <MenuItemsInput  $isCheckbox2
         type="checkbox"
         checked={checkedCategory}
         onChange={(e)=>setCheckedCategory(e.target.value)}
         ></MenuItemsInput>
         </MenuItems>
+        <MenuItems  $isPermission >
+        <MenuItemsText> دسترسی به ادمین</MenuItemsText>
+        <MenuItemsInput  $isCheckbox3
+        type="checkbox"
+        checked={checkedUser}
+        onChange={(e)=>setCheckedUser(e.target.value)}
+        ></MenuItemsInput>
+        </MenuItems>
       <Buttons>
-        <SubmitButton  onClick={handleApiCategory}>Submit</SubmitButton>
-        <CancleButton onClick={handleButtonClick}>Cancle</CancleButton>
+        <SubmitButton  onClick={handleApiCategory}>ذخیره</SubmitButton>
+        <CancleButton onClick={handleButtonClick}>انصراف</CancleButton>
       </Buttons>
       </Menu>
     </Container>

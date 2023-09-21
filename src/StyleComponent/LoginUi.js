@@ -67,32 +67,39 @@ margin-top: 5em;
 margin-left:auto;
 margin-right: auto;
 }
+@media (max-width:620px) {
+  
+  width: 80%;
+margin-left:auto;
+margin-right: auto;
+}
 @media(max-width:480px){
-  width: 60%;
+  width: 100%;
 }
 `;
 
 export const HeaderText=styled.div`
-font-size: 1.4rem;
 font-weight: 800;
 direction: rtl;
+font-size: 1.5rem;
 color: #D0D2D6;
 @media (min-width:992px) {
     font-size: 1.2rem;
 }
 @media(max-width:480px){
-margin-right: 2.5em;
+
 
 }
 `;
 
 export const HeaderIndex=styled.div`
-font-size: 1.1rem;
+font-size: 1.3rem;
 direction: rtl;
 color: #D0D2D6;
-margin-bottom: 2em;
-@media(max-width:480px){
-margin-right: 3.2em;
+margin-bottom: 1.5em;
+margin-top: 1em;
+@media(max-width:380px){
+  font-size: 1rem;
 }
 `
 export const Form=styled.form`
@@ -112,10 +119,13 @@ justify-content: space-between;
 export const Password=styled.p`
 color: #D0D2D6;
 font-size: 1.2rem;
+margin-bottom:.5em;
+margin-top:.5em;
 `;
 export const User=styled.p`
 color: #D0D2D6;
 font-size: 1.2rem;
+margin-bottom:.5em;
 `
 
   export const Forgot=styled.p`
@@ -127,7 +137,7 @@ font-weight: 400;
 export const Input=styled.input`
   /* width: 90%;  
 margin-left: 2em; */
-height: 2rem;
+height: 2.2rem;
 background-color:#283046;
 border: 1px solid #B4B7BD;
 border-color: #4a536a;
@@ -135,7 +145,7 @@ color: #B4B7BD;
  margin-bottom: 1em; 
  border-radius: .3em;
  padding-left: 1em;
- font-size: .8em;
+ font-size: 1.13em;
 
   &:focus{
     outline: none;
@@ -168,9 +178,9 @@ color: #B4B7BD;
   background-color:#283046 ;
 `;
 export const SigninButton=styled.button`
-height: 2.5rem;
+height: 2.7rem;
 width: 100%;
-margin-top: 1.2rem;
+margin-top: 1.4rem;
 border-radius: 0.358rem;
 color: white;
 font-weight: 400;
@@ -178,6 +188,11 @@ border-color: #7367F0 !important;
 background-color: #7367F0 !important;
 border: 1px solid #404656;
 
+
+`
+export const Textt=styled.div`
+font-size:1.3rem;
+margin-bottom: .24em;
 `
  export const ErrorMessage = styled.p`
   color: red;

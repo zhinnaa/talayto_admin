@@ -7,15 +7,16 @@ export function UseContextProvider({ children }) {
     quantity:0,
     title:"",
     description:"",
-    tags:"",
+    tags:[],
+    image:[],
     weightUnit:"",
     weight:"",
-    image:[],
+    thumbnailImage:"",
     category:"",
     discount:0.0,
     installment:{
       available:"no",
-      minWeight:0.0,
+      minWeight:0,
       deadline:0
     }
   });

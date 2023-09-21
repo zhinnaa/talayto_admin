@@ -150,7 +150,7 @@ export default function CreateUser() {
                 />
               </FormMain>
               <FormMain>
-                <InputText>موجودی کیف پول</InputText>
+                <InputText>موجودی طلا</InputText>
                 <Inputs
                   value={goldBalance}
                   onChange={(e) => setgoldBalance(e.target.value)}

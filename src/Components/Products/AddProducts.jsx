@@ -79,6 +79,7 @@ export default function StepWizard() {
 
     const dataToSubmit = {
       ...userData,
+      thumbnailImage:"",
       image: [],
       title: userData.title,
       description:userData.description,
@@ -90,7 +91,7 @@ export default function StepWizard() {
       category:userData.category,
      installment:{
       available:userData.installment.available === "yes",
-      minWeight: parseFloat(userData.installment.minWeight),
+      minWeight: parseInt(userData.installment.minWeight),
       deadLine: parseInt(userData.installment.deadline),
      }
     };
@@ -169,7 +170,7 @@ export default function StepWizard() {
             style={{ backgroundColor: clicked ? "#665be0" : "gray" }}
           >
             <NextIcon></NextIcon>
-            <NextSpan>{isFinalStep ? "Submit" : "Next"}</NextSpan>
+            <NextSpan>{isFinalStep ? "ذخیره" : "بعدی"}</NextSpan>
           </NextButton>
 
           <PreButton
@@ -177,7 +178,7 @@ export default function StepWizard() {
             onClick={goToPreviousStep}
             style={{ backgroundColor: clickedBack ? "#665be0" : "gray" }}
           >
-            <PreSpan>Pre</PreSpan>
+            <PreSpan>قبل</PreSpan>
             <PreIcon></PreIcon>
           </PreButton>
         </Footer>

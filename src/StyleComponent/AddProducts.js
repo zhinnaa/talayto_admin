@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
  padding: 0;
  margin: 0;
  box-sizing: border-box;
- font-family: 'samim';
+ font-family: estedad;
  background-color: #161d31;
 }
 `;
@@ -18,12 +18,13 @@ export const Headers = styled.div`
   display: flex;
   direction: rtl;
   margin-top: 1em;
-  width: 77%;
+  width: 74%;
 `;
 export const HeaderText = styled.div`
   color: var(--yellow);
-  font-size: 1.3rem;
-  margin-right: 0.5em;
+  font-size: 1.2rem;
+  margin-right: 0.9em;
+  margin-top: 0.1em;
 `;
 
 export const HeaderIcon = styled(AiOutlineAppstoreAdd)`
@@ -39,7 +40,8 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   width: 70%;
   background-color: #283046;
-  height: ${props => (props.hasImages ? "1000px" : "600px")};
+  /* height: ${props => (props.hasImages ? "1100px" : "600px")}; */
+  height: 700px;
   margin-left: 4em;
   border-radius: 1em;
 
@@ -142,6 +144,14 @@ flex-direction: column;
 
 `}
   ${(props) =>
+    props.$isAa &&
+    `
+
+margin-top:.2em;
+
+
+`}
+  ${(props) =>
     props.$isDiv &&
     `
 display:flex;
@@ -159,16 +169,23 @@ export const FormGroup = styled.div`
   ${(props) =>
     props.$isPic &&
     `
-width:50%
+width:52%;
+
 `}
   ${(props) =>
     props.$isDiv &&
     `
-margin-top:2.5em;
+margin-top:5em;
+
+`}
+${(props) =>
+    props.$isDivss &&`
+    margin-top:5.3em;
 `}
 ${(props) =>
     props.$isDivs &&`
-width:32%;
+    margin-top:1.3em;
+    width:40%;
 `}
 
 ${(props) =>
@@ -178,7 +195,7 @@ display:flex;
 justify-content:center;
 flex-direction: row;
 margin-top:1.5em;
-width:50px;
+width:53px;
 
 
 `}
@@ -188,7 +205,7 @@ ${(props) =>
 display:flex;
 flex-direction: row;
 width:60%;
-margin-right:3em;
+margin-right:2.5em;
 
 ]
 `}
@@ -197,7 +214,7 @@ margin-right:3em;
 
 export const FormLabel = styled.label`
   color: #dcdcdc;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 
   ${(props) =>
     props.$isInstallment &&
@@ -213,9 +230,15 @@ width:490px;
 
 `}
   ${(props) =>
+    props.$isDivsLeft &&
+    `
+margin-right:25%;
+
+`}
+  ${(props) =>
     props.$isSeconds &&
     `
-margin-right:1.9em;
+margin-right:3.8em;
 width:490px;
 
 `}
@@ -244,10 +267,34 @@ width:20px;
 
 `}
   ${(props) =>
+    props.$isDivss &&
+    `
+height:4.2em;
+
+`}
+  ${(props) =>
     props.$isDivs &&
     `
-width:80%;
+width:69%;
 
+`}
+  ${(props) =>
+    props.$isSecond &&
+    `
+width:98%;
+
+`}
+  ${(props) =>
+    props.$isSeconds &&
+    `
+width:98%;
+
+`}
+  ${(props) =>
+    props.$isDivsLeft &&
+    `
+width:66%;
+margin-right:25%;
 `}
 `;
 
@@ -258,40 +305,51 @@ export const Footer = styled.div`
 `;
 
 export const PreButton = styled.button`
-  width: 100px;
+  width: 120px;
   height: 3em;
   background-color: #7267e3;
   border: 1px solid;
   border-radius: 0.4em;
-  margin-right: 2em;
-  margin-top: 5em;
+  margin-right: 4em;
+  margin-top: 16%;
+  display: flex;
+  justify-content:space-evenly;
+ 
 `;
 
 export const PreIcon = styled(AiOutlineArrowRight)`
   color: white;
-  margin-left: 1em;
+
+  margin-top: 1em;
 `;
-export const PreSpan = styled.span`
+export const PreSpan = styled.div`
   color: #dcdc;
-  font-size: 0.9rem;
+  font-size: .9rem;
+  margin-top: .9em;
+ 
 `;
 
 export const NextButton = styled.button`
-  width: 100px;
+  width: 120px;
   height: 3em;
   border: 1px solid;
   border-radius: 0.4em;
   margin-left: 2em;
   margin-top: 5em;
   z-index: 200;
+  margin-top: 16%;
+  display: flex;
+  justify-content:space-evenly;
 `;
 
 export const NextIcon = styled(AiOutlineArrowLeft)`
   color: white;
   margin-right: 0.5em;
+  margin-top: 1em;
 `;
-export const NextSpan = styled.span`
+export const NextSpan = styled.div`
   color: #dcdc;
+  margin-top: .6em;
 `;
 export const FormSelect = styled.select`
   width: 100%;
@@ -303,8 +361,7 @@ export const FormSelect = styled.select`
 
 export const Label = styled.div`
   color: white;
-  margin-top: 2.1em;
-  width: 118px;
+  margin-top: 2.5em;
   margin-right: 2em;
-  font-size: 1.1rem;
+  font-size: 1rem;
 `;

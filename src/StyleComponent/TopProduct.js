@@ -8,28 +8,30 @@ export const GlobalStyle = createGlobalStyle`
  padding: 0;
  margin: 0;
  box-sizing: border-box;
- font-family: 'samim';
+ font-family: estedad;
  background-color: var(--background)
   }
 `;
 
 export const Container=styled.div`
-width: 100%;
+width: 45%;
+margin-bottom: 1em;
+@media (max-width:500px){
 
+width: 90%;
+margin-left: 1em;
+}
 `;
 export const HeaderConst=styled.div`
-display: flex;
-justify-content: space-between;
-width: 75%;
-margin-top: 2em;
-margin-left: 3em;
+
 direction: rtl;
+margin-right: 4em;
 /* border-bottom: 1px solid #a4b2bc; */
 `;
 export const HeaderConstRight=styled.div`
 display: flex;
 direction: rtl;
-padding-top: 2.5em;
+
 padding-right:1em;
 padding-bottom: .7em;
 
@@ -40,11 +42,11 @@ color: var(--yellow);
 
 `
 export const AddUserButton=styled(NavLink)`
-width: 120px;
-height: 3.4em;
+width: 100px;
+height: 3em;
 background-color:#2b2b2b ;
 border-radius: .4em;
-margin-top: 2.3em;
+margin-top: 2em;
 border: none;
 background-color: var(--yellow);
 text-decoration: none;
@@ -56,9 +58,8 @@ margin-top: 1em;
 `
 export const HeaderConstText=styled.div`
 color:var(--yellow);
-margin-right: 1em;
-margin-top: .1em;
-font-size: 1.2rem;
+
+font-size: 1.4rem;
 
 
 `
